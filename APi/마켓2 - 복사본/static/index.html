@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>저당식품 추천!</title>
+  <style>
+    body { font-family:'Noto Sans KR',sans-serif; text-align:center; background:#f9f9f9; margin:0; padding:20px; }
+    h2 { font-size:26px; margin-bottom:30px; }
+    .container { display:flex; justify-content:center; gap:20px; flex-wrap:nowrap; overflow-x:hidden; }
+    .category { width:220px; border:1px solid #ddd; border-radius:10px; padding:10px; box-shadow:2px 2px 6px rgba(0,0,0,0.1); flex-shrink:0; }
+    .category h3 { margin-bottom:8px; font-size:18px; color:#002366; }
+    .slider { width:200px; height:260px; border:1px solid #ccc; border-radius:6px; overflow:hidden; margin:0 auto; background:#fff; }
+    .slides { display:flex; transition:transform 0.5s ease; }
+    .slide-item { min-width:200px; display:flex; flex-direction:column; align-items:center; text-align:center; }
+    .image-box { width:200px; height:150px; display:flex; justify-content:center; align-items:center; background:#fff; border-radius:6px; overflow:hidden; }
+    .image-box img { max-width:100%; max-height:100%; object-fit:contain; }
+    .info { font-size:13px; margin-top:8px; padding:0 5px; width:100%; line-height:1.4em; }
+    .info .title { display:block; height:2.8em; overflow:hidden; text-overflow:ellipsis; white-space:normal; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+    .info b { color:#d32f2f; font-size:14px; display:block; margin-top:5px; }
+    a { text-decoration:none; color:#333; }
+    .category.fresh  { background:#e8f5e9; }
+    .category.frozen { background:#e3f2fd; }
+    .category.sauce  { background:#fff3e0; }
+    .category.retort { background:#f3e5f5; }
+    .category.sale   { background:#ffebee; }
+  </style>
+</head>
+<body>
+  <h2>🍎 저당식품 추천!</h2>
+  <div class="container" id="categories"></div>
+
+  <script>
+    // 카테고리 정의(그대로 유지)
+    const categories = [
+      {name:"신선식품", query:"저당 신선식품", class:"fresh"},
+      {name:"냉동제품", query:"저당 냉동", class:"frozen"},
+      {name:"소스류",  query:"저당 소스", class:"sauce"},
+      {name:"레토르트",query:"저당 레토르트", class:"retort"},
+      {name:"특가",   query:"저당 할인", class:"sale"}
+    ];
+
+    // 1) 브라우저별 사용자 식별자
+    const USER_ID = localStorage.getItem("uid") || (() => {
+      const u = "u_" + Math.random().toString(36).slice(2,10);
+      localStorage.setItem("uid", u);
+      return u;
+    })();
+
+    // 2) 개인화 추천 호출
+    async function fetchRecs(categoryName, fallbackQuery) {
+      const rec = await fetch(`/api/recommend?user_id=${encodeURIComponent(USER_ID)}&category=${encodeURIComponent(categoryName)}`)
+                        .then(r => r.json()).catch(()=>({items:[]}));
+      let items = rec.items || [];
+
+      // 후보가 적으면 /api/products로 폴백
+      if (items.length < 5) {
+        const more = await fetch(`/api/products?q=${encodeURIComponent(fallbackQuery||categoryName)}`)
+                           .then(r => r.json()).catch(()=>({items:[]}));
+        const have = new Set(items.map(x => x.item_id || x.link || x.productId));
+        (more.items||[]).forEach(m => {
+          const iid = m.productId || m.link;
+          if (!have.has(iid)) {
+            items.push({
+              item_id: iid,
+              title: (m.title||"").replace(/<[^>]+>/g,''),
+              link: m.link, image: m.image, lprice: m.lprice, category: categoryName
+            });
+          }
+        });
+      }
+      return items;
+    }
+
+    // 3) 트래킹 전송(view/click)
+    function sendTrack(payload) {
+      try {
+        navigator.sendBeacon("/api/track", new Blob([JSON.stringify(payload)], {type:"application/json"}));
+      } catch (e) {
+        fetch("/api/track", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)});
+      }
+    }
+
+    // 4) 렌더링 (개인화 버전)
+    async function renderCategories() {
+      const container = document.getElementById("categories");
+      for (let cat of categories) {
+        const items = await fetchRecs(cat.name, cat.query);
+
+        let html = `
+          <div class="category ${cat.class}">
+            <h3>${cat.name}</h3>
+            <div class="slider"><div class="slides">`;
+
+        items.forEach((item, idx) => {
+          const price = item.lprice && item.lprice !== "0" ? Number(item.lprice).toLocaleString()+"원" : "가격 정보 없음";
+          const iid = item.item_id || item.productId || item.link;
+          html += `
+            <div class="slide-item">
+              <a href="${item.link}" target="_blank"
+                 class="product-link"
+                 data-item="${iid}"
+                 data-slot="${idx}"
+                 data-cat="${cat.name}">
+                <div class="image-box">
+                  <img src="${item.image}" alt="${(item.title||'')}">
+                </div>
+              </a>
+              <div class="info">
+                <span class="title">${(item.title||"").replace(/<[^>]+>/g,'')}</span>
+                <b>${price}</b>
+              </div>
+            </div>`;
+        });
+
+        html += `</div></div></div>`;
+        container.insertAdjacentHTML("beforeend", html);
+      }
+
+      // 첫 노출 view 기록
+      document.querySelectorAll(".slides").forEach(slides => {
+        const first = slides.querySelector(".product-link");
+        if (first) {
+          sendTrack({
+            user_id: USER_ID,
+            item_id: first.dataset.item,
+            event_type: "view",
+            category: first.dataset.cat,
+            slot_index: Number(first.dataset.slot)||0
+          });
+        }
+      });
+
+      // 클릭 트래킹
+      document.querySelectorAll(".product-link").forEach(a=>{
+        a.addEventListener("click", ()=>{
+          sendTrack({
+            user_id: USER_ID,
+            item_id: a.dataset.item,
+            event_type: "click",
+            category: a.dataset.cat,
+            slot_index: Number(a.dataset.slot)||0
+          });
+        });
+      });
+
+      // 자동 슬라이딩 + 슬라이드별 view 기록
+      document.querySelectorAll(".slides").forEach(slides => {
+        let idx = 0;
+        setInterval(() => {
+          idx = (idx + 1) % slides.children.length;
+          slides.style.transform = `translateX(-${200*idx}px)`;
+          const link = slides.children[idx]?.querySelector(".product-link");
+          if (link) {
+            sendTrack({
+              user_id: USER_ID,
+              item_id: link.dataset.item,
+              event_type: "view",
+              category: link.dataset.cat,
+              slot_index: Number(link.dataset.slot)||idx
+            });
+          }
+        }, 3000);
+      });
+    }
+
+    renderCategories();
+  </script>
+</body>
+</html>

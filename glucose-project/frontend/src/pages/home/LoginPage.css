@@ -1,0 +1,80 @@
+body {
+  background: #e6f9f3; /* 연한 민트 배경 */
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.card-login {
+  background: #fff;
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.card-login h2,
+.card-login .title {
+  color: #059669;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* input 공통 */
+.card-login input[type="text"],
+.card-login input[type="password"] {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border: 1.5px solid #bde5d6;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  background: #fafafa;
+}
+
+.card-login input:focus {
+  border-color: #34d399;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2);
+  background: #fff;
+}
+
+/* 메인 로그인 버튼 */
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right, #10b981, #059669); /* 그라디언트 */
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: opacity 0.3s ease;
+}
+
+.btn-login:hover {
+  opacity: 0.9;
+}
+
+/* 서브 버튼 (회원가입, 홈으로) */
+.btn-outline {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #10b981;
+  border-radius: 10px;
+  background: white;
+  color: #10b981;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: #10b981;
+  color: white;
+}

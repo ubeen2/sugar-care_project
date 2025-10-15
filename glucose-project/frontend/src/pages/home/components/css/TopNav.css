@@ -1,0 +1,20 @@
+.topnav-bar {
+    /*background: #ffffff; !* 틸 색상 *!*/
+    /*color: white;*/
+    background: var(--nav-bg);
+    border-bottom: 1px solid #7dc17d;
+}
+
+.navbar,
+.navbar .nav-link,
+.navbar-brand {
+    color: var(--fg-light) !important;
+    }
+
+.navbar .nav-link:hover {
+    opacity: 0.8;
+}
+
+.form-check-input {
+    cursor: pointer;
+}

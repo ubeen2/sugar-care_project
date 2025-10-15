@@ -1,0 +1,98 @@
+:root {
+    /* Light Theme */
+    --bg-light: #F8FDF9;
+    --fg-light: #0F172A;
+    --card-light: #FFFFFF;
+    --border-light: #D7E7E1;
+    --nav-light: #ffffff;
+    --logo-light: url("./assets/wellDang.png"); /* ✅ 라이트 로고 */
+
+    /* Dark Theme */
+    --bg-dark: #0B1218;
+    --fg-dark: #E6E9EF;
+    --card-dark: #0F172A;
+    --border-dark: #243243;
+    --nav-dark: #101820;
+    --logo-light: url("./assets/wellDang-darkmode.png");
+    /* Font Size */
+    --size-normal: 16px;
+    --size-big: 23px;
+
+    /* Shadow */
+    /*--shadow-light: 0 8px 24px rgba(0,0,0,.10);*/
+    /*--shadow-dark: 0 10px 30px rgba(0,0,0,.35);*/
+
+    --bg-main: var(--bg-light);
+    --fg-main: var(--fg-light);
+    --card-main: var(--card-light);
+    --border-main: var(--border-light);
+    --nav-bg: var(--nav-light);
+}
+
+/* 기본 테마 */
+html, body, #root {
+    background: var(--bg-light);
+    color: var(--fg-light);
+    font-size: var(--size-normal);
+}
+.card.exercise-card {
+    background: #f0faf9;        /* youtube-container 색상 */
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    /*box-shadow: var(--shadow-light);*/
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* 카드 */
+.card {
+    background: var(--card-light);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    /*box-shadow: var(--shadow-light);*/
+}
+
+/* 헤더 */
+.header-bar{
+    min-height:90px;
+    padding-top:15px;
+    padding-right :150px;
+    padding-left :150px;
+    display:grid;
+    grid-template-rows: 4fr 1fr;
+    /*background:#198539;            !* 배경색 지정 *!*/
+    background: white;
+    background-image:none !important; /* 혹시 인라인에서 썻던 배경 이미지 무효화 */
+    background-size: cover;
+    background-position: center;
+
+}
+
+/* 위 영역: 로고 가운데 정렬 */
+.header-top{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    border-radius:8px;
+}
+
+/* 아래 영역: 우측 정렬 (토글/선택) */
+.header-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    width:100%;
+}
+
+/* 로고 크기 */
+.main_logo{
+    height:100px;
+    width:auto;
+    display:block;
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .market {
+    filter: brightness(0.90);
+    transition: filter 0.3s ease, background-color 0.3s ease;
+}

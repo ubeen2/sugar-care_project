@@ -1,0 +1,43 @@
+.container{
+    margin:0 auto;
+    width:70%;
+    border: 1px solid black;
+    border-radius : 8px;
+    min-height:50vh;
+    display: flex;
+}
+
+.container-left{
+    flex:4;
+}
+.container-left img{
+    height:100%;
+}
+
+.container-right{
+    flex:6;
+    background-color: #c8d8fb;
+    padding: 10px;
+}.tooltip {
+     position: relative;
+     cursor: pointer;
+     display: inline-block;
+     margin: 0 4px;
+ }
+
+.tooltip-img {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100px;
+    border: 1px solid #ccc;
+    background-color: white;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+}
+
+.tooltip:hover .tooltip-img {
+    display: block;
+}

@@ -1,0 +1,65 @@
+.glucose-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 18px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+.glucose-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    gap: 20px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #15803d;
+    margin-bottom: 6px;
+}
+
+.desc {
+    font-size: 14px;
+    color: #374151;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.mode-toggle {
+    display: flex;
+    background: #f3f4f6;
+    border-radius: 9999px;
+    overflow: hidden;
+    height: 36px;
+}
+
+.mode-toggle button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.mode-toggle button.active {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #fff;
+}
+
+.mode-toggle button:hover:not(.active) {
+    background: #e5e7eb;
+}
+
+.chart-area {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 12px 16px;
+}

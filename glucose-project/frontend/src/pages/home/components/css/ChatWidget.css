@@ -1,0 +1,264 @@
+/* ================================
+   챗봇 아이콘 버튼
+=================================== */
+.chat-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1300;
+}
+
+.chat-btn img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.chat-btn img:hover {
+  transform: scale(1.1);
+}
+
+/* ================================
+   챗봇 패널
+=================================== */
+.chat-panel {
+  position: fixed;
+  top: 0;
+  right: -1000px;
+  width: 40%;
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+  transition: right 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  z-index: 1400;
+}
+
+.chat-container.open .chat-panel {
+  right: 0;
+}
+
+/* ================================
+   챗봇 헤더
+=================================== */
+.chat-header {
+  background: #FFD43B;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header h3 {
+  margin: 0;
+}
+
+.chat-header button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* ================================
+   챗봇 본문 (스크롤 영역)
+=================================== */
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  background: #fff;
+  scroll-behavior: smooth;
+}
+
+.chat-body::-webkit-scrollbar {
+  width: 8px;
+}
+.chat-body::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+}
+.chat-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* 메시지 영역 */
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message-row {
+  display: flex;
+  width: 100%;
+}
+
+.user-row {
+  justify-content: flex-start;
+}
+
+.bot-row {
+  justify-content: flex-end;
+}
+
+.message-bubble {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.message-bubble.user {
+  background-color: #e1f5fe;
+  align-self: flex-start;
+}
+
+.message-bubble.bot {
+  background-color: #f1f1f1;
+  align-self: flex-end;
+}
+
+/* ================================
+   입력창 (하단 고정처럼 보이되 플로우 안에 포함)
+=================================== */
+.chat-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background: #fafafa;
+  box-sizing: border-box;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  font-size: 14px;
+}
+
+.chat-input button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+/* 버튼 색상 */
+.chat-input button:nth-of-type(1) {
+  background: #4CAF50;
+  color: white;
+}
+.chat-input button:nth-of-type(1):hover {
+  background: #45a049;
+}
+
+.chat-input button:nth-of-type(2) {
+  background: #f44336;
+  color: white;
+}
+.chat-input button:nth-of-type(2):hover {
+  background: #da190b;
+}
+
+/* ================================
+   💡 질문 예시 (챗봇 오른쪽)
+=================================== */
+.chat-suggestions {
+  position: fixed;
+  top: 0;
+  right: calc(40% - 260px);
+  width: 260px;
+  height: 100%;
+  background: #f8f9fa;
+  border-left: 1px solid #ddd;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.15);
+  padding: 20px 14px;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, right 0.4s ease;
+  z-index: 1350;
+}
+
+/* 챗봇 열릴 때만 표시 */
+.chat-container.open .chat-suggestions {
+  opacity: 1;
+  pointer-events: auto;
+  right: 40%;
+}
+
+/* 제목 */
+.chat-suggestions h4 {
+  text-align: center;
+  margin-bottom: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+/* 목록 */
+.chat-suggestions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chat-suggestions li {
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #00796b;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+/* 자주하는 질문 hover 효과 */
+.chat-suggestions ul.faq-list li:hover {
+  background: #e0f2f1;
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+/* 사용가능한 기능 hover 비활성화 */
+.chat-suggestions ul.feature-list li:hover {
+  background: #ffffff;
+  transform: none;
+  cursor: default;
+}
+
+/* 강조 텍스트 */
+.chat-suggestions li strong {
+  color: #004d40;
+  font-weight: 600;
+}
+
+/* ================================
+   모바일 대응
+=================================== */
+@media (max-width: 768px) {
+  .chat-suggestions {
+    display: none;
+  }
+
+  .chat-panel {
+    width: 100%;
+  }
+}

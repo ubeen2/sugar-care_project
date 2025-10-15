@@ -1,0 +1,46 @@
+/* react-calendar 기본 스타일 커스터마이즈 */
+.react-calendar {
+    width: 100% !important;   /* 🔹 부모 width 꽉 채우기 */
+    max-width: 800px;         /* 🔹 최대 크기 제한 (원하면) */
+    border: 1px solid #d7e7e1;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+/* 헤더 (월/년 표시) 꾸미기 */
+.react-calendar__navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.react-calendar__navigation button {
+    color: #198754;           /* 🔹 Bootstrap Success 색 */
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* 요일 헤더 스타일 */
+.react-calendar__month-view__weekdays {
+    text-align: center;
+    font-weight: 600;
+    color: #555;
+}
+
+/* 날짜 스타일 */
+.react-calendar__tile {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.react-calendar__tile--now {
+    background: #e6f9f0 !important; /* 오늘 날짜 */
+    border-radius: 8px;
+}
+
+.react-calendar__tile--active {
+    background: #198754 !important; /* 선택된 날짜 */
+    color: white !important;
+    border-radius: 8px;
+}

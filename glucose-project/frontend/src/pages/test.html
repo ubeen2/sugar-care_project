@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>오당탕탕 - 건강 대시보드</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: system-ui,'Noto Sans KR',sans-serif; margin: 0; background: #f8fdf8; color:#222; }
+        header { background:#fff; padding:12px 24px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 1px 4px rgba(0,0,0,.1);}
+        main { display:grid; grid-template-columns: 1fr 2fr 1fr; gap:20px; padding:20px; }
+        section, aside { background:#fff; border-radius:12px; padding:16px; box-shadow:0 1px 4px rgba(0,0,0,.05);}
+        h2 { font-size:16px; margin:0 0 8px; }
+        .highlight { color:green; font-weight:bold; }
+        .graph { height:250px; background:linear-gradient(to top, #eaf8e6, #fff); border-radius:12px; display:flex; justify-content:center; align-items:center; }
+        .stats { display:flex; gap:16px; }
+        .stat { flex:1; background:#f8fff8; padding:12px; border-radius:8px; text-align:center; }
+        .products { display:flex; gap:12px; }
+        .product { flex:1; border:1px solid #eee; padding:12px; border-radius:8px; }
+        .small-box { font-size:14px; margin-bottom:12px; }
+        .today-check { display:flex; justify-content:space-between; align-items:center; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>🍀 오당탕탕</div>
+    <div>김건강님</div>
+</header>
+
+<main>
+    <!-- 왼쪽 사이드 -->
+    <aside>
+        <section>
+            <h2>연속 출석</h2>
+            <p class="highlight">7일</p>
+        </section>
+
+        <section>
+            <h2>빠른 실행</h2>
+            <button>혈당 기록 추가</button><br/><br/>
+            <button>맞춤 운동 시작</button><br/><br/>
+            <button>AI 건강 상담</button>
+        </section>
+
+        <section>
+            <h2>오늘의 요약</h2>
+            <p>혈당 측정 4/6회</p>
+        </section>
+    </aside>
+
+    <!-- 가운데 메인 -->
+    <section>
+        <h2>혈당 추이 & AI 예측</h2>
+        <div class="graph">[그래프 자리]</div>
+
+        <div class="stats">
+            <div class="stat">
+                <h3>오늘의 걸음</h3>
+                <p>5,780 보</p>
+            </div>
+            <div class="stat">
+                <h3>오늘 섭취량</h3>
+                <p>1.8L</p>
+            </div>
+        </div>
+
+        <h2>AI 맞춤 상품 추천</h2>
+        <div class="products">
+            <div class="product">자몽 건강식품 세트<br/>24,650원</div>
+            <div class="product">스마트 혈당 측정기<br/>89,000원</div>
+            <div class="product">당뇨 케어 영양제<br/>45,000원</div>
+        </div>
+    </section>
+
+    <!-- 오른쪽 사이드 -->
+    <aside>
+        <section>
+            <h2>AI 맞춤 추천</h2>
+            <div class="small-box">건강 진단 → AI 진단 받기</div>
+            <div class="small-box">운동 추천 → 운동 시작하기</div>
+            <div class="small-box">식단 추천 → 식단 보기</div>
+        </section>
+
+        <section>
+            <h2>주변 건강시설</h2>
+            <p>생활체육센터 (0.6km)</p>
+            <p>운동클럽 (2.5km)</p>
+        </section>
+
+        <section>
+            <h2>오늘의 일정</h2>
+            <div class="today-check">
+                <span>아침 혈당 측정</span>
+                <span>완료</span>
+            </div>
+            <div class="today-check">
+                <span>점심 혈당 측정</span>
+                <span>대기</span>
+            </div>
+        </section>
+    </aside>
+</main>
+
+</body>
+</html>

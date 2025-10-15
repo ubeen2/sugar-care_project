@@ -1,0 +1,536 @@
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 컨테이너 */
+.container-exercies {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #4f46e5;
+}
+
+.nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav a {
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nav a:hover {
+    color: #111827;
+}
+
+.container-exercies{
+    margin-top:30px;
+}
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #111827;
+}
+
+.page-header p {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+/* 카드 기본 스타일 */
+.card-exercise {
+    background-color: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* 레이아웃 그리드 */
+.top-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .top-section {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.stats-section {
+    margin-bottom: 2rem;
+}
+
+/* 출석 체크 카드 */
+.attendance-card {
+    background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.card-exercise-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card-exercise-title svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #4f46e5;
+}
+
+.card-exercise-title h3 {
+    color: #312e81;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.streak {
+    color: #4f46e5;
+    font-size: 0.875rem;
+}
+
+.week-days {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.day-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.day-circle {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+}
+
+.day-circle.checked {
+    background-color: #6366f1;
+    color: white;
+}
+
+.day-circle.checked svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.day-circle.unchecked {
+    background-color: #e5e7eb;
+    color: #9ca3af;
+}
+
+.day-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+/* 버튼 */
+.btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background-color: #4f46e5;
+    color: white;
+}
+
+.btn-primary:hover:not(.disabled) {
+    background-color: #4338ca;
+}
+
+.btn-primary.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* 캐릭터 성장 카드 */
+.character-card {
+    background: linear-gradient(135deg, #faf5ff 0%, #fce7f3 100%);
+}
+
+.character-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.character-emoji {
+    font-size: 5rem;
+    margin-bottom: 0.5rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.character-display h4 {
+    color: #581c87;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.badge-exercise {
+    background-color: #f3e8ff;
+    color: #7c3aed;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.progress-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.progress-value {
+    font-size: 0.875rem;
+    color: #7c3aed;
+    font-weight: 500;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 0.75rem;
+    background-color: #e5e7eb;
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #7c3aed;
+    transition: width 0.3s ease;
+}
+
+.progress-next {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.progress-next svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* 통계 카드 */
+.stats-card {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+}
+
+.stats-card h3 {
+    color: #065f46;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background-color: white;
+    border-radius: 0.5rem;
+}
+
+.stat-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.stat-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.stat-icon.bg-blue {
+    background-color: #dbeafe;
+    color: #2563eb;
+}
+
+.stat-icon.bg-purple {
+    background-color: #f3e8ff;
+    color: #9333ea;
+}
+
+.stat-icon.bg-orange {
+    background-color: #fed7aa;
+    color: #ea580c;
+}
+
+.stat-icon.bg-green {
+    background-color: #d1fae5;
+    color: #059669;
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.stat-value {
+    font-size: 1rem;
+    color: #111827;
+    font-weight: 600;
+}
+
+/* 운동 프로그램 섹션 */
+.programs-section h3 {
+    color: #111827;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.programs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .programs-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.program-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+.program-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.program-image {
+    position: relative;
+    height: 12rem;
+    overflow: hidden;
+}
+
+.program-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.difficulty-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.difficulty-beginner {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.difficulty-intermediate {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.difficulty-advanced {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.program-content {
+    padding: 1rem;
+}
+
+.program-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.program-header h4 {
+    color: #111827;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.category-badge {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+.program-description {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+
+.program-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.meta-item svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.meta-item:last-child svg {
+    color: #ea580c;
+}
+
+/* 푸터 */
+
+
+/* 토스트 알림 */
+.toast {
+    position: fixed;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #111827;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    animation: slideDown 0.3s ease;
+    max-width: 90%;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .nav {
+        gap: 1rem;
+        font-size: 0.875rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}

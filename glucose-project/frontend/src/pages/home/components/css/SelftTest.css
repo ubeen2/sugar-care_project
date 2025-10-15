@@ -1,0 +1,278 @@
+/* =========================================
+   Global
+========================================= */
+/*body {*/
+/*    background: linear-gradient(180deg, #e0f2fe 0%, #f0fdf4 100%);*/
+/*    font-family: 'Noto Sans KR', sans-serif;*/
+/*    min-height: 100vh;*/
+/*    margin: 0;*/
+/*    padding: 20px 0;*/
+/*    color: #1e3a8a;*/
+/*}*/
+
+/* =========================================
+   Container (SelfTest)
+========================================= */
+#self-test {
+    max-width: 900px;
+    margin: 24px auto;
+    padding: 20px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.15);
+    transition: all 0.3s ease;
+}
+#self-test h2 {
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    color: #0284c7;
+    margin-bottom: 20px;
+}
+.soft-bg { background: rgba(255, 255, 255, 0.75); }
+
+/* =========================================
+   Card & Grid
+========================================= */
+.card-selfTest {
+    background: rgba(255, 255, 255, 0.85);
+    border: 2px solid #bae6fd;
+    border-radius: 20px;
+    padding: 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(147, 197, 253, 0.25);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+.card-selfTest:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(147, 197, 253, 0.35);
+}
+.grid-selfTest { display: grid; gap: 18px; padding:20px;}
+@media (min-width: 720px) {
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+}
+
+/* =========================================
+   Labels & Inputs
+========================================= */
+label {
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: block;
+    color: #0369a1;
+    font-size: 15px;
+    letter-spacing: .2px;
+}
+select, input[type="number"]{
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.8px solid #93c5fd;
+    border-radius: 12px;
+    background: rgba(240, 249, 255, 0.95);
+    font-size: 15px;
+    transition: .3s ease;
+    box-shadow: inset 0 2px 5px rgba(147, 197, 253, 0.15);
+}
+select:hover, input[type="number"]:hover {
+    background: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 0 10px rgba(56,189,248,.3);
+    cursor: pointer;
+}
+select:focus, input[type="number"]:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 8px rgba(56,189,248,.6);
+    background: #fff;
+}
+
+/* =========================================
+   Pill (결과 뱃지)
+========================================= */
+.pill {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    transition: all .3s ease;
+    color: #083344;
+}
+.pill.mint   { background: linear-gradient(135deg,#a7f3d0,#86efac); color:#065f46; }
+.pill.yellow { background: linear-gradient(135deg,#fef08a,#fde047); color:#78350f; }
+.pill.sky    { background: linear-gradient(135deg,#93c5fd,#60a5fa); color:#1e3a8a; }
+
+/* =========================================
+   Buttons
+========================================= */
+.btns-selfTest {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin: 26px 0; justify-content: center;
+}
+.btn-selfTest {
+    cursor: pointer; border: none; border-radius: 12px;
+    padding: 12px 18px; font-weight: 700; font-size: 15px;
+    transition: all .3s ease; box-shadow: 0 4px 12px rgba(147,197,253,.25);
+}
+.btn-selfTest.primary { background: linear-gradient(135deg,#38bdf8,#60a5fa); color:#fff; }
+.btn-selfTest.primary:hover { background: linear-gradient(135deg,#0ea5e9,#3b82f6); transform:translateY(-3px); box-shadow:0 6px 15px rgba(56,189,248,.3); }
+.btn-selfTest.ghost   { background: linear-gradient(135deg,#fef9c3,#fde68a); color:#854d0e; }
+.btn-selfTest.ghost:hover { background: linear-gradient(135deg,#fef08a,#facc15); transform:translateY(-3px); box-shadow:0 6px 15px rgba(252,211,77,.3); }
+
+.addTest{
+    width:100%;
+    margin-top:10px;
+}
+/* =========================================
+   Meter (결과 게이지)
+========================================= */
+.meter { height: 10px; background:#e0f2fe; border-radius:999px; overflow:hidden; margin-top:8px; box-shadow: inset 0 2px 5px rgba(56,189,248,.3); }
+.meter span { display:block; height:100%; border-radius:999px; transition: width .5s ease; }
+
+/* =========================================
+   Segmented pills (라디오)
+========================================= */
+.segmented { display:flex; gap:8px; flex-wrap:wrap; }
+.check-pill input { display:none; }
+.check-pill label{
+    display:inline-block; padding:9px 14px; border-radius:12px;
+    border:1px solid #d1d5db; background:#fff; font-weight:700;
+    font-size:14px; color:#0f172a; cursor:pointer;
+    transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease;
+    user-select:none;
+}
+.check-pill label:hover { transform:translateY(-1px); box-shadow:0 4px 12px rgba(2,132,199,.12); border-color:#93c5fd; }
+.check-pill input:checked + label {
+    background: linear-gradient(180deg,#d1fae5 0%,#a7f3d0 100%);
+    color:#065f46; border-color:#34d399; box-shadow:0 6px 14px rgba(16,185,129,.22);
+}
+.check-pill input:focus-visible + label { outline:3px solid #93c5fd; outline-offset:2px; border-radius:14px; }
+
+/* =========================================
+   기본정보 카드 (왼쪽 4칩 + 오른쪽 Ring 크게)
+========================================= */
+.info-card {
+    position: relative;
+    border-radius: 20px;
+    background: rgba(255,255,255,.82);
+    padding: 14px 14px;           /* 좌우 여백을 조금 줄여 왼쪽 칩을 더 붙임 */
+    overflow: hidden;
+}
+.info-card::before{
+    content:""; position:absolute; inset:0; padding:2px; border-radius:inherit;
+    background: linear-gradient(120deg,#93c5fd,#a7f3d0,#fde68a);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; pointer-events:none;
+}
+
+/* 본문 레이아웃: 왼쪽 정보 + 오른쪽 링 */
+.info-body{
+    display:flex;
+    align-items:stretch;        /* 🔥 링이 카드 높이를 꽉 채우도록 */
+    gap: 12px;
+}
+.info-left{
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 4px;
+}
+.info-title{
+    font-size: 18px;
+    font-weight: 800;
+    color: #0284c7;
+}
+
+/* 왼쪽 4칩을 촘촘하게 */
+.info-grid.tight-4{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+}
+@media (max-width: 719px){
+    .info-grid.tight-4{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+/* 칩 */
+.chip{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:10px 12px; border-radius:12px;
+    background:#f0f9ff; border:1px solid #dbeafe; color:#0f172a;
+    font-weight:700; letter-spacing:.2px;
+    box-shadow:0 2px 8px rgba(147,197,253,.18);
+    transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+.chip:hover{ transform:translateY(-2px); background:#fff; box-shadow:0 6px 14px rgba(147,197,253,.25); }
+
+/* 오른쪽 BMI 랩퍼: 카드 천장/바닥에 맞춰 크게 가운데 배치 */
+.bmi-wrap{
+    flex: 0 0 180px;            /* 고정 폭 (적당히 크게) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-block: -6px;         /* 🔥 카드 패딩을 살짝 넘겨 상하 꽉 차 보이게 */
+}
+
+/* 링 크기: 반응형으로 크게 */
+.bmi-ring{
+    --p: 65;                    /* 0~100, JSX에서 스타일로 덮어씀 */
+    --ring: #10b981;
+    width: clamp(110px, 16vw, 140px);
+    height: clamp(110px, 16vw, 140px);
+    border-radius: 50%;
+    background: conic-gradient(var(--ring) calc(var(--p) * 1%), #e5e7eb 0);
+    display: grid; place-items: center;
+    padding: clamp(8px, 1.4vw, 12px);
+    box-shadow: 0 6px 18px rgba(2,132,199,.18);
+    position: relative;
+}
+.bmi-ring::after{
+    content:""; position:absolute; inset:0; border-radius:50%;
+    background: radial-gradient(transparent 56%, rgba(255,255,255,.85) 57%);
+}
+/* 내부 원을 비율로 맞춰서 항상 꽉 차게 */
+.bmi-center{
+    width: 82%;
+    height: 82%;
+    border-radius: 50%;
+    background: #fff;
+    display: grid; place-items: center; text-align: center;
+    box-shadow: inset 0 0 0 1px #e5e7eb;
+}
+.bmi-value{ font-weight:800; font-size: 20px; color:#0f172a; line-height:1; margin-bottom:2px; }
+.bmi-ring small{ font-size:10px; color:#64748b; }
+
+/* 컬러 토너 */
+.bmi-ring.mint   { --ring:#10b981; }
+.bmi-ring.yellow { --ring:#f59e0b; }
+.bmi-ring.sky    { --ring:#3b82f6; }
+
+/* 모바일에서 줄바꿈 */
+@media (max-width: 719px){
+    .info-body{ flex-direction: column; gap: 10px; }
+    .bmi-wrap{ flex-basis: auto; margin-block: 0; }
+}
+
+.close-btn-selfTest {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 22px;
+    color: #0284c7;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    line-height: 1;
+    transition: transform 0.2s ease, color 0.2s ease;
+    z-index: 10;
+}
+
+.close-btn:hover {
+    color: #0ea5e9;
+    transform: scale(1.15);
+}

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <title>내 주변 건강 장소 탐색 (평점 통합)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    body{font-family:system-ui,'Noto Sans KR',sans-serif;margin:0;background:#f7f7f7;}
+    header{padding:12px 16px;background:#222;color:#fff;font-weight:600}
+    .wrap{display:flex;gap:16px;padding:16px}
+    #map{height:78vh;flex:2;min-width:520px;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+    .side{flex:1;min-width:320px;max-width:420px;height:78vh;overflow:auto}
+    .toolbar{display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+    .btn{cursor:pointer;padding:8px 12px;border:none;border-radius:8px;background:#4f46e5;color:#fff}
+    .btn.secondary{background:#0ea5e9}
+    .sel,.input{padding:7px 8px;border:1px solid #ddd;border-radius:8px;background:#fff}
+    .row{display:flex;gap:8px;margin-bottom:8px}
+    .cards .card{border:1px solid #e5e5e5;border-radius:12px;background:#fff;margin-bottom:10px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+    .cards .card img{width:100%;height:160px;object-fit:cover;display:block}
+    .cards .cnt{padding:10px}
+    .pill{display:inline-block;font-size:12px;background:#eef;padding:2px 8px;border-radius:999px;margin-right:6px}
+    .muted{color:#666;font-size:12px}
+  </style>
+</head>
+<body>
+<header>내 주변 건강 장소 탐색 (평점 통합)</header>
+<div class="wrap">
+  <div id="map"></div>
+
+  <div class="side">
+    <div class="toolbar">
+      <button id="btnLocate" class="btn secondary">📍 내 위치</button>
+      <select id="selCat" class="sel">
+        <option value="전체">전체</option>
+        <option value="헬스장">헬스장</option>
+        <option value="공원">공원</option>
+        <option value="내과">내과</option>
+        <option value="종합병원">종합병원</option>
+        <option value="내분비내과">내분비내과</option>
+      </select>
+      <select id="selSort" class="sel">
+        <option value="accuracy">정확도순</option>
+        <option value="distance">가까운순</option>
+        <option value="rating">평점순</option>
+      </select>
+      <input id="inRadius" class="input" type="number" min="1" max="20" value="3" style="width:72px"> km
+      <button id="btnSearch" class="btn">검색</button>
+    </div>
+
+    <div class="row">
+      <input id="inCoord" class="input" style="flex:1" placeholder="(위도,경도) 또는 주소 입력"/>
+      <button id="btnAddr" class="btn">주소로 검색</button>
+    </div>
+
+    <div class="cards">
+      <div id="cards"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const map = L.map('map').setView([37.5665, 126.9780], 14);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(map);
+let meMarker=null, placeLayer=L.layerGroup().addTo(map);
+
+// 아이콘 안전 로드
+// const ICONS = {
+//
+//   "헬스장": "https://raw.githubusercontent.com/seonghuyn/icon_list/master/weightlifter.png",
+//   "공원": "https://github.com/seonghuyn/icon_list/blob/master/park%20(1).png?raw=true",
+//   "내과": "https://raw.githubusercontent.com/seonghuyn/icon_list/master/stethoscope1.png",
+//   "종합병원": "https://raw.githubusercontent.com/seonghuyn/icon_list/master/hospital.png",
+//   "내분비내과": "https://img.icons8.com/ios/50/pills.png"
+// };
+const ICONS = {
+  "헬스장": "https://img.icons8.com/?size=100&id=1uTCzCEvN6rL&format=png&color=000000",
+  "공원": "https://cdn-icons-png.flaticon.com/512/861/861060.png",
+  "내과": "https://cdn-icons-png.flaticon.com/512/2966/2966489.png",
+  "종합병원": "https://cdn-icons-png.flaticon.com/512/616/616554.png",
+  "내분비내과": "https://cdn-icons-png.flaticon.com/512/2920/2920678.png"
+};
+const defaultIcon = L.icon({
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconSize:[25,41], iconAnchor:[12,41], popupAnchor:[1,-34], shadowSize:[41,41]
+});
+function loadIcon(url){return new Promise(res=>{if(!url){res(null);return;}const img=new Image();img.onload=()=>res(L.icon({iconUrl:url,iconSize:[32,32],iconAnchor:[16,32]}));img.onerror=()=>res(null);img.src=url;});}
+async function safeMarker(lat, lon, cat){const url=ICONS[cat];const icon=await loadIcon(url);return L.marker([lat,lon], icon?{icon}:{icon:defaultIcon});}
+
+function setMeMarker(lat, lon){
+  if(meMarker) map.removeLayer(meMarker);
+  meMarker = L.marker([lat,lon], {icon:defaultIcon}).addTo(map).bindPopup("<b>내 위치</b>").openPopup();
+  map.setView([lat,lon], 14);
+}
+
+function renderCards(places){
+  const dfImg = places.filter(p=>p["대표이미지"]);
+  const top5 = dfImg.slice(0,5);
+  const cards = document.getElementById('cards'); cards.innerHTML="";
+  if(top5.length===0){ cards.innerHTML='<div class="muted">표시할 이미지가 없습니다.</div>'; return; }
+  for(const p of top5){
+    const rating = (typeof p["평점"]==='number')? p["평점"].toFixed(1) : '정보 없음';
+    cards.innerHTML += `
+      <div class="card">
+        <img src="${p["대표이미지"]}" alt="">
+        <div class="cnt">
+          <span class="pill">${p["카테고리"]}</span>
+          <div style="font-weight:600;margin-top:4px">${p["이름"]}</div>
+          <div class="muted" style="margin-top:2px">⭐ ${rating}</div>
+          <div class="muted" style="margin-top:4px">${p["주소"]||""}</div>
+          <div style="margin-top:6px"><a href="${p["링크"]}" target="_blank" rel="noopener">카카오맵에서 보기</a></div>
+        </div>
+      </div>`;
+  }
+}
+
+async function geocode(q){
+  const res = await fetch(`/api/geocode?q=${encodeURIComponent(q)}`);
+  const data = await res.json();
+  if(!data.ok) throw new Error(data.error||'geocode failed');
+  return {lat:data.lat, lon:data.lon};
+}
+async function searchAround(lat, lon){
+  const category = document.getElementById('selCat').value;
+  const sort = document.getElementById('selSort').value;
+  const radius_km = parseInt(document.getElementById('inRadius').value||'3',10);
+  const url = `/api/search?lat=${lat}&lon=${lon}&category=${encodeURIComponent(category)}&sort=${sort}&radius_km=${radius_km}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  if(!data.ok){ alert('검색 실패'); return; }
+
+  placeLayer.clearLayers();
+  renderCards(data.places);
+
+  for(const p of data.places){
+    const rating=(typeof p["평점"]==='number')?p["평점"].toFixed(1):'정보 없음';
+    const imgHtml = p["대표이미지"]?`<img src="${p["대표이미지"]}" style="width:150px;height:100px;object-fit:cover;border-radius:6px;"><br>`:'';
+    const html = `
+      <b>${p["이름"]}</b><br>
+      카테고리: ${p["카테고리"]}<br>
+      주소: ${p["주소"]||"-"}<br>
+      전화: ${p["전화번호"]||"-"}<br>
+      ⭐ 평점: ${rating}<br>
+      ${imgHtml}
+      <a href="${p["링크"]}" target="_blank" rel="noopener">카카오맵에서 보기</a>`;
+    const mk = await safeMarker(p["위도"], p["경도"], p["카테고리"]);
+    mk.addTo(placeLayer).bindPopup(html);
+  }
+}
+
+document.getElementById('btnLocate').addEventListener('click', ()=>getMyLocation(true));
+document.getElementById('btnSearch').addEventListener('click', async ()=>{
+  const v=document.getElementById('inCoord').value.trim();
+  if(!v){ alert('좌표 또는 주소를 입력하세요.'); return; }
+  let lat, lon;
+  if(v.startsWith("(") && v.includes(",")){
+    try{ const [a,b]=v.replace(/[()]/g,'').split(','); lat=parseFloat(a); lon=parseFloat(b);}catch(e){}
+  }else{
+    try{ const p=await geocode(v); lat=p.lat; lon=p.lon;}catch(e){ alert('주소 변환 실패'); return; }
+  }
+  setMeMarker(lat, lon); searchAround(lat, lon);
+});
+document.getElementById('btnAddr').addEventListener('click', async ()=>{
+  const v=document.getElementById('inCoord').value.trim();
+  if(!v){ alert('주소를 입력하세요.'); return; }
+  try{ const p=await geocode(v); setMeMarker(p.lat,p.lon); searchAround(p.lat,p.lon);}catch(e){ alert('주소 변환 실패: '+e.message);}
+});
+
+function getMyLocation(focus){
+  if(!navigator.geolocation){ alert("브라우저가 위치정보를 지원하지 않습니다."); return; }
+  navigator.geolocation.getCurrentPosition(pos=>{
+    const lat=+pos.coords.latitude.toFixed(6), lon=+pos.coords.longitude.toFixed(6);
+    document.getElementById('inCoord').value=`(${lat},${lon})`;
+    if(focus) setMeMarker(lat,lon);
+    searchAround(lat,lon);
+  }, err=>alert("위치 정보를 가져올 수 없습니다: "+err.message));
+}
+window.addEventListener('load', ()=>getMyLocation(true));
+</script>
+</body>
+</html>

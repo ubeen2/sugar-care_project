@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>홈트레이닝 인기 영상</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        h1 { margin-bottom: 20px; }
+        .container {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+        }
+        .box {
+          width: 500px;
+          border: 2px solid black;
+          padding: 10px;
+        }
+        .swiper { width: 100%; height: 320px; }
+        .swiper-slide img { width: 100%; border-radius: 6px; }
+        .title { font-size: 14px; margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .label { margin-top: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+<h1>혈당관리 어렵지 않아요!</h1>
+<div class="container">
+    <!-- 5~10분대 -->
+    <div class="box">
+        <div class="swiper" id="swiper-short">
+            <div class="swiper-wrapper" id="short-ex"></div>
+        </div>
+        <div class="label">5~10분대의 간단한 운동</div>
+    </div>
+    <!-- 30분 이상 -->
+    <div class="box">
+        <div class="swiper" id="swiper-long">
+            <div class="swiper-wrapper" id="long-ex"></div>
+        </div>
+        <div class="label">30분 이상의 고강도 운동</div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    const API_KEY = "AIzaSyBHviz484F_dMN-fzoYiWXzl7XpQPo0yZc";   // 🔑 발급받은 유튜브 API 키 입력
+    const query = "홈트레이닝";
+
+    async function fetchVideos() {
+      // 🔹 인기순(order=viewCount)으로 50개 영상 가져오기
+      const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&order=viewCount&maxResults=50&q=${encodeURIComponent(query)}&key=${API_KEY}`;
+      const searchRes = await fetch(searchUrl);
+      const searchData = await searchRes.json();
+      const videoIds = searchData.items.map(item => item.id.videoId).join(",");
+
+      // 🔹 상세 정보 요청 (길이 포함)
+      const videoUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id=${videoIds}&key=${API_KEY}`;
+      const videoRes = await fetch(videoUrl);
+      const videoData = await videoRes.json();
+
+      function parseDuration(duration) {
+        const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+        const hours = parseInt(match[1] || 0);
+        const minutes = parseInt(match[2] || 0);
+        const seconds = parseInt(match[3] || 0);
+        return hours * 3600 + minutes * 60 + seconds;
+      }
+
+      let shortCount = 0;
+      let longCount = 0;
+
+      videoData.items.forEach(item => {
+        const duration = parseDuration(item.contentDetails.duration);
+        const videoId = item.id;
+        const title = item.snippet.title;
+        const thumbnail = item.snippet.thumbnails.medium.url;
+        const url = `https://www.youtube.com/watch?v=${videoId}`;
+
+        // 5~10분대 (300~600초)
+        if (duration >= 300 && duration <= 600 && shortCount < 5) {
+          document.getElementById("short-ex").innerHTML += `
+            <div class="swiper-slide">
+              <a href="${url}" target="_blank">
+                <img src="${thumbnail}" alt="${title}">
+                <div class="title">${title}</div>
+              </a>
+            </div>`;
+          shortCount++;
+        }
+
+        // 30분 이상 (>= 1800초)
+        if (duration >= 1800 && longCount < 5) {
+          document.getElementById("long-ex").innerHTML += `
+            <div class="swiper-slide">
+              <a href="${url}" target="_blank">
+                <img src="${thumbnail}" alt="${title}">
+                <div class="title">${title}</div>
+              </a>
+            </div>`;
+          longCount++;
+        }
+      });
+
+      // 🔹 결과 없을 경우 안내 표시
+      if (shortCount === 0) {
+        document.getElementById("short-ex").innerHTML = `<div class="swiper-slide"><div class="title">⚠️ 5~10분 영상 없음</div></div>`;
+      }
+      if (longCount === 0) {
+        document.getElementById("long-ex").innerHTML = `<div class="swiper-slide"><div class="title">⚠️ 30분 이상 영상 없음</div></div>`;
+      }
+
+      // 슬라이더 초기화 , 슬라이더 속도
+      new Swiper("#swiper-short", { loop: true, autoplay: { delay: 5000 }});
+      new Swiper("#swiper-long", { loop: true, autoplay: { delay: 5000 }});
+    }
+
+    fetchVideos();
+</script>
+</body>
+</html>

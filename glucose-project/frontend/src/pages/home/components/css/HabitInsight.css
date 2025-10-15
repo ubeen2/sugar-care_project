@@ -1,0 +1,105 @@
+.habit-section {
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid #bae6fd;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 18px rgba(147, 197, 253, 0.3);
+  transition: 0.3s;
+}
+
+.habit-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(147, 197, 253, 0.4);
+}
+
+.habit-section h3 {
+  font-size: 20px;
+  color: #0284c7;
+  margin-bottom: 16px;
+}
+
+.habit-section h4 {
+  font-size: 16px;
+  color: #0369a1;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.insight-text {
+  margin-top: 20px;
+  text-align: center;
+  color: #1e3a8a;
+}
+
+.insight-text p {
+  margin: 4px 0;
+  font-size: 15px;
+}
+
+.insight-comment {
+  margin-top: 16px;
+  background: #f0fdf4;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  font-size: 14px;
+  color: #14532d;
+  font-weight: 600;
+}
+/* ===== 운동 실천율 섹션 ===== */
+.insight-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #f0fdfa;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.04);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  color: #065f46;
+}
+
+.stat-item p {
+  font-weight: 600;
+  margin: 0;
+  font-size: 14px;
+}
+
+.stat-item strong {
+  color: #0d9488;
+  font-size: 18px;
+}
+
+/* 도넛차트 미니 */
+.doughnut-mini {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.doughnut-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  color: #047857;
+}
+
+/* 막대차트는 넓게 */
+.insight-bar {
+  margin-top: 10px;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
