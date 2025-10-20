@@ -84,5 +84,5 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 ###  **추가 링크 및 자료**
 
 * GitHub 프로젝트 코드: [github.com/SugarCare_project](https://github.com/ubeen2/sugar-care_project)
-* 발표자료(Gamma): [https://gamma.app/sugarcare-presentation](https://gamma.app/sugarcare-presentation)
+* 
 * 포트폴리오 PDF: [별첨파일]
