@@ -90,13 +90,6 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ---
 
-# 📊 데이터 분석 리포트 | SugarCare AI Model Overview
-
-> **프로젝트:** 개인 혈당 기반 AI 리스크 예측 플랫폼  
-> **설명:** 이 문서는 프로젝트의 데이터 분석 및 머신러닝 모델링 과정을 시각화하여 정리한 리포트입니다.
-
----
-
 ## 🩺 전체 구성 안내
 - **이미지:** `데이터분석/slide1.png` ~ `slide15.png`  
 - **구성:** 각 슬라이드별 제목, 이미지, 설명 섹션  
@@ -110,7 +103,7 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ### 1️⃣ 데이터 전처리 & 통합 파이프라인
 <p align="center">
-  <img src="./데이터분석/slide1.png" width="900"/>
+  <img src="./데이터분석/img/slide1.png" width="900"/>
   <br>
   <em>슬라이드 1. 데이터 통합 및 정제 과정 시각화</em>
 </p>
@@ -122,7 +115,7 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ### 2️⃣ EDA: 혈당 분포 및 피처 상관관계
 <p align="center">
-  <img src="./데이터분석/slide2.png" width="900"/>
+  <img src="./데이터분석/img/slide2.png" width="900"/>
   <br>
   <em>슬라이드 2. 주요 변수 간 상관관계 시각화</em>
 </p>
@@ -134,7 +127,7 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ### 3️⃣ Feature Engineering 구조
 <p align="center">
-  <img src="./데이터분석/slide3.png" width="900"/>
+  <img src="./데이터분석/img/slide3.png" width="900"/>
   <br>
   <em>슬라이드 3. 파생변수 생성 및 윈도우 통계 구조</em>
 </p>
@@ -146,7 +139,7 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ### 4️⃣ 모델 비교 (LGBM / RF / LSTM)
 <p align="center">
-  <img src="./데이터분석/slide4.png" width="900"/>
+  <img src="./데이터분석/img/slide4.png" width="900"/>
   <br>
   <em>슬라이드 4. 세 가지 모델의 성능 비교</em>
 </p>
@@ -158,7 +151,7 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ### 5️⃣ 훈련·검증 구조 (LOPO vs Self)
 <p align="center">
-  <img src="./데이터분석/slide5.png" width="900"/>
+  <img src="./데이터분석/img/slide5.png" width="900"/>
   <br>
   <em>슬라이드 5. 환자별 교차검증 구조 비교</em>
 </p>
@@ -170,7 +163,7 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ### 6️⃣ 예측 결과 시각화 (120분 예측)
 <p align="center">
-  <img src="./데이터분석/slide6.png" width="900"/>
+  <img src="./데이터분석/img/slide6.png" width="900"/>
   <br>
   <em>슬라이드 6. 120분 뒤 혈당 예측 결과</em>
 </p>
@@ -182,7 +175,7 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ### 7️⃣ 위험 구간 자동 알림 로직
 <p align="center">
-  <img src="./데이터분석/slide7.png" width="900"/>
+  <img src="./데이터분석/img/slide7.png" width="900"/>
   <br>
   <em>슬라이드 7. FastAPI 기반 실시간 위험 알림 구조</em>
 </p>
@@ -194,7 +187,7 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ### 8️⃣ FastAPI 연동 구조
 <p align="center">
-  <img src="./데이터분석/slide8.png" width="900"/>
+  <img src="./데이터분석/img/slide8.png" width="900"/>
   <br>
   <em>슬라이드 8. API 서버 구조 및 프론트 연동</em>
 </p>
@@ -206,7 +199,7 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ### 9️⃣ React 대시보드 구조
 <p align="center">
-  <img src="./데이터분석/slide9.png" width="900"/>
+  <img src="./데이터분석/img/slide9.png" width="900"/>
   <br>
   <em>슬라이드 9. TodayBlood 및 HabitInsight UI 구조</em>
 </p>
@@ -218,7 +211,7 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ### 🔟 UX 개선 전후 비교
 <p align="center">
-  <img src="./데이터분석/slide10.png" width="900"/>
+  <img src="./데이터분석/img/slide10.png" width="900"/>
   <br>
   <em>슬라이드 10. UI 개선 전후 사용자 피드백 비교</em>
 </p>
@@ -230,7 +223,7 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ### 11️⃣ 데이터 파이프라인 요약
 <p align="center">
-  <img src="./데이터분석/slide11.png" width="900"/>
+  <img src="./데이터분석/img/slide11.png" width="900"/>
   <br>
   <em>슬라이드 11. 데이터 흐름(ETL → 모델 → API) 요약</em>
 </p>
@@ -242,7 +235,7 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ### 12️⃣ 모델 성능 리포트 (ROC/AUC, MAE)
 <p align="center">
-  <img src="./데이터분석/slide12.png" width="900"/>
+  <img src="./데이터분석/img/slide12.png" width="900"/>
   <br>
   <em>슬라이드 12. 성능지표 및 Feature Importance 시각화</em>
 </p>
@@ -254,7 +247,7 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ### 13️⃣ 이상치 탐지 및 안정성 테스트
 <p align="center">
-  <img src="./데이터분석/slide13.png" width="900"/>
+  <img src="./데이터분석/img/slide13.png" width="900"/>
   <br>
   <em>슬라이드 13. 이상치 제거 및 모델 안정화 과정</em>
 </p>
@@ -264,29 +257,6 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ---
 
-### 14️⃣ 미래 확장 (FDS / AML 모델화)
-<p align="center">
-  <img src="./데이터분석/slide14.png" width="900"/>
-  <br>
-  <em>슬라이드 14. 금융보안 모델 확장 시나리오</em>
-</p>
-
-**설명:**  
-(예: 혈당 예측 로직을 금융 이상거래탐지(FDS) 구조로 확장 가능성 설명)
-
----
-
-### 15️⃣ 요약 및 기대효과
-<p align="center">
-  <img src="./데이터분석/slide15.png" width="900"/>
-  <br>
-  <em>슬라이드 15. 프로젝트 핵심성과 및 기대효과</em>
-</p>
-
-**설명:**  
-(예: 모델 정확도 91%, 사용자 피드백 20% 향상, Explainable AI 가능성 강조)
-
----
 
 ## 🔗 추가 리소스
 
