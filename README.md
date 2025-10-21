@@ -90,27 +90,214 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ---
 
-## 🔹 분석 시각자료 (총 15장)
+# 📊 데이터 분석 리포트 | SugarCare AI Model Overview
 
-| No | 슬라이드 제목 | 미리보기 | 설명 |
-|----|----------------|----------|------|
-| 1 | **데이터 전처리 & 통합 파이프라인** | ![slide1](./데이터분석/slide1.png) | 국민건강보험 데이터 및 사용자 로그 병합 후, 결측치 처리·스케일링 수행 |
-| 2 | **EDA: 혈당 분포 및 피처 상관관계** | ![slide2](./데이터분석/slide2.png) | 혈당 평균과 BMI, HDL 등 주요 변수의 상관관계 분석 (Pearson r = 0.64) |
-| 3 | **Feature Engineering 구조** | ![slide3](./데이터분석/slide3.png) | 12개 시계열 혈당값 + 윈도우 통계(30/60/120분) + Δ5, Δ30 변화율 feature 생성 |
-| 4 | **모델 비교 (LGBM vs RF vs LSTM)** | ![slide4](./데이터분석/slide4.png) | RMSE 기준 LGBM 0.18로 최적, LSTM은 장기 추세 대응 우수 |
-| 5 | **훈련-검증 구조 (LOPO vs Self)** | ![slide5](./데이터분석/slide5.png) | 환자별 Leave-One-Patient-Out vs 자기 데이터 Self 훈련 비교 |
-| 6 | **예측 결과 시각화 (120분 예측)** | ![slide6](./데이터분석/slide6.png) | 미래 120분 혈당 변화 예측 그래프 — 실제값 대비 ±5mg/dL 수준 |
-| 7 | **위험 구간 자동 알림 로직** | ![slide7](./데이터분석/slide7.png) | 120분 후 예측값이 140 이상일 경우 주의/위험 신호 전송 구조 |
-| 8 | **FastAPI 연동 구조** | ![slide8](./데이터분석/slide8.png) | `/predict` 엔드포인트를 통해 모델 → 프론트엔드 JSON 응답 |
-| 9 | **React 대시보드 구조** | ![slide9](./데이터분석/slide9.png) | TodayBlood / HabitInsight 컴포넌트 내 데이터 렌더링 |
-| 10 | **UX 개선 전후 비교** | ![slide10](./데이터분석/slide10.png) | 시각적 경고, 영양제 추천 추가로 사용자 피드백 긍정 20%↑ |
-| 11 | **데이터 파이프라인 요약** | ![slide11](./데이터분석/slide11.png) | ETL → Feature Store → Model Training → REST API 구조 |
-| 12 | **모델 성능 리포트 (ROC/AUC, MAE)** | ![slide12](./데이터분석/slide12.png) | ROC-AUC: 0.94 / MAE: 0.15 / Feature importance top5 변수 시각화 |
-| 13 | **이상치 탐지 및 안정성 테스트** | ![slide13](./데이터분석/slide13.png) | 데이터 이상치 제거로 예측 안정성 8% 향상 |
-| 14 | **미래 확장 (FDS/AML 모델화)** | ![slide14](./데이터분석/slide14.png) | 금융거래 데이터에도 적용 가능한 시계열 이상탐지 구조 설계 |
-| 15 | **요약 및 기대효과** | ![slide15](./데이터분석/slide15.png) | 데이터 기반 건강/금융 리스크 조기탐지, Explainable AI 가능성 제시 |
+> **프로젝트:** 개인 혈당 기반 AI 리스크 예측 플랫폼  
+> **설명:** 이 문서는 프로젝트의 데이터 분석 및 머신러닝 모델링 과정을 시각화하여 정리한 리포트입니다.
 
 ---
+
+## 🩺 전체 구성 안내
+- **이미지:** `데이터분석/slide1.png` ~ `slide15.png`  
+- **구성:** 각 슬라이드별 제목, 이미지, 설명 섹션  
+- **작성 팁:** 설명 부분에 요약 + 핵심 인사이트 + 모델 영향 등을 자유롭게 추가
+
+---
+
+## 📘 데이터 분석 슬라이드 (총 15장)
+
+---
+
+### 1️⃣ 데이터 전처리 & 통합 파이프라인
+<p align="center">
+  <img src="./데이터분석/slide1.png" width="900"/>
+  <br>
+  <em>슬라이드 1. 데이터 통합 및 정제 과정 시각화</em>
+</p>
+
+**설명:**  
+(예: 공공데이터와 사용자 로그를 병합하여 결측치 제거, 이상치 필터링 수행)
+
+---
+
+### 2️⃣ EDA: 혈당 분포 및 피처 상관관계
+<p align="center">
+  <img src="./데이터분석/slide2.png" width="900"/>
+  <br>
+  <em>슬라이드 2. 주요 변수 간 상관관계 시각화</em>
+</p>
+
+**설명:**  
+(예: BMI, HDL, 공복혈당 간 관계 분석 / Pearson r 계산 등)
+
+---
+
+### 3️⃣ Feature Engineering 구조
+<p align="center">
+  <img src="./데이터분석/slide3.png" width="900"/>
+  <br>
+  <em>슬라이드 3. 파생변수 생성 및 윈도우 통계 구조</em>
+</p>
+
+**설명:**  
+(예: Δ5, Δ30 변화율, 이동평균, 시계열 패턴 변수 생성 과정 설명)
+
+---
+
+### 4️⃣ 모델 비교 (LGBM / RF / LSTM)
+<p align="center">
+  <img src="./데이터분석/slide4.png" width="900"/>
+  <br>
+  <em>슬라이드 4. 세 가지 모델의 성능 비교</em>
+</p>
+
+**설명:**  
+(예: RMSE, MAE 비교 / LightGBM의 안정성 및 속도 우위 강조)
+
+---
+
+### 5️⃣ 훈련·검증 구조 (LOPO vs Self)
+<p align="center">
+  <img src="./데이터분석/slide5.png" width="900"/>
+  <br>
+  <em>슬라이드 5. 환자별 교차검증 구조 비교</em>
+</p>
+
+**설명:**  
+(예: LOPO 방식으로 환자 일반화 성능 검증 / Self 방식 비교 결과)
+
+---
+
+### 6️⃣ 예측 결과 시각화 (120분 예측)
+<p align="center">
+  <img src="./데이터분석/slide6.png" width="900"/>
+  <br>
+  <em>슬라이드 6. 120분 뒤 혈당 예측 결과</em>
+</p>
+
+**설명:**  
+(예: 예측값과 실제값 비교 그래프, RMSE 수치, 위험구간 표시 로직 설명)
+
+---
+
+### 7️⃣ 위험 구간 자동 알림 로직
+<p align="center">
+  <img src="./데이터분석/slide7.png" width="900"/>
+  <br>
+  <em>슬라이드 7. FastAPI 기반 실시간 위험 알림 구조</em>
+</p>
+
+**설명:**  
+(예: 예측 혈당이 기준 초과 시 주의/위험 상태 전송 로직 설명)
+
+---
+
+### 8️⃣ FastAPI 연동 구조
+<p align="center">
+  <img src="./데이터분석/slide8.png" width="900"/>
+  <br>
+  <em>슬라이드 8. API 서버 구조 및 프론트 연동</em>
+</p>
+
+**설명:**  
+(예: `/predict` 엔드포인트, 데이터 직렬화, CORS 설정, React 통신 구조)
+
+---
+
+### 9️⃣ React 대시보드 구조
+<p align="center">
+  <img src="./데이터분석/slide9.png" width="900"/>
+  <br>
+  <em>슬라이드 9. TodayBlood 및 HabitInsight UI 구조</em>
+</p>
+
+**설명:**  
+(예: 예측 결과를 시각화하고 사용자 피드백을 반영하는 대시보드 구현)
+
+---
+
+### 🔟 UX 개선 전후 비교
+<p align="center">
+  <img src="./데이터분석/slide10.png" width="900"/>
+  <br>
+  <em>슬라이드 10. UI 개선 전후 사용자 피드백 비교</em>
+</p>
+
+**설명:**  
+(예: 개선된 시각 피드백 → 사용자 참여율 +20% 증가 / 직관적 경고 디자인 적용)
+
+---
+
+### 11️⃣ 데이터 파이프라인 요약
+<p align="center">
+  <img src="./데이터분석/slide11.png" width="900"/>
+  <br>
+  <em>슬라이드 11. 데이터 흐름(ETL → 모델 → API) 요약</em>
+</p>
+
+**설명:**  
+(예: 데이터 수집 → 전처리 → Feature Store → 모델 학습 → REST API)
+
+---
+
+### 12️⃣ 모델 성능 리포트 (ROC/AUC, MAE)
+<p align="center">
+  <img src="./데이터분석/slide12.png" width="900"/>
+  <br>
+  <em>슬라이드 12. 성능지표 및 Feature Importance 시각화</em>
+</p>
+
+**설명:**  
+(예: ROC-AUC 0.94 / 중요 변수 Top5 / 재현율·정밀도 분석)
+
+---
+
+### 13️⃣ 이상치 탐지 및 안정성 테스트
+<p align="center">
+  <img src="./데이터분석/slide13.png" width="900"/>
+  <br>
+  <em>슬라이드 13. 이상치 제거 및 모델 안정화 과정</em>
+</p>
+
+**설명:**  
+(예: 이상치 제거로 MAE 8% 개선 / 학습 데이터 분포 균형화)
+
+---
+
+### 14️⃣ 미래 확장 (FDS / AML 모델화)
+<p align="center">
+  <img src="./데이터분석/slide14.png" width="900"/>
+  <br>
+  <em>슬라이드 14. 금융보안 모델 확장 시나리오</em>
+</p>
+
+**설명:**  
+(예: 혈당 예측 로직을 금융 이상거래탐지(FDS) 구조로 확장 가능성 설명)
+
+---
+
+### 15️⃣ 요약 및 기대효과
+<p align="center">
+  <img src="./데이터분석/slide15.png" width="900"/>
+  <br>
+  <em>슬라이드 15. 프로젝트 핵심성과 및 기대효과</em>
+</p>
+
+**설명:**  
+(예: 모델 정확도 91%, 사용자 피드백 20% 향상, Explainable AI 가능성 강조)
+
+---
+
+## 🔗 추가 리소스
+
+- [🔍 Jupyter 분석 HTML 보기](./데이터분석/혈당-운동기준.html)  
+- [🧾 LOPO vs Self 비교 리포트](./데이터분석/LOPO_vs_Self.html)  
+- [📈 메인 README로 돌아가기](../README.md)
+
+---
+
+> © 2025 Yubin Kang | SugarCare Project  
+> Data-driven AI & Health Risk Prediction Platform
 
 ---
 
@@ -130,16 +317,6 @@ YH데이터베이스의 보안 플랫폼 내에서 데이터 기반 의사결정
 
 ---
 
-## 📸 참고 (README 내 미리보기)
-
-```html
-<p align="center">
-  <img src="./데이터분석/slide3_Feature.png" width="600"/>
-  <br>
-  <em>Feature Engineering 구조 요약</em>
-</p>
-
----
 
 ###  **추가 링크 및 자료**
 
