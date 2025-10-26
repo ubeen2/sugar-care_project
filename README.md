@@ -91,7 +91,6 @@
 <p align="center">
   <img src="./데이터분석/img/slide1.png" width="900"/>
   <br>
-  <em>슬라이드 1. 데이터 통합 및 정제 과정 시각화</em>
 </p>
 
 **설명:**  
@@ -103,7 +102,6 @@
 <p align="center">
   <img src="./데이터분석/img/slide2.png" width="900"/>
   <br>
-  <em>슬라이드 2. 주요 변수 간 상관관계 시각화</em>
 </p>
 
 
@@ -113,7 +111,6 @@
 <p align="center">
   <img src="./데이터분석/img/slide3.png" width="900"/>
   <br>
-  <em>슬라이드 3. 파생변수 생성 및 윈도우 통계 구조</em>
 </p>
 
 ---
