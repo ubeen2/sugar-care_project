@@ -302,4 +302,6 @@
 ###  **추가 링크 및 자료**
 
 * GitHub 프로젝트 코드: [github.com/SugarCare_project](https://github.com/ubeen2/sugar-care_project)
+* 유튜브 시연 영상 : (유튜브채널 - https://youtu.be/Nt6PhylsvMs?si=eL5J2XsRUkD_1Fhn<img width="1188" height="116" alt="image" src="https://github.com/user-attachments/assets/9135c4c5-3244-4e99-a5ae-e48bb4928377" />
+ 
 
