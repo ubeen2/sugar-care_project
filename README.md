@@ -243,27 +243,28 @@
 
 ---
 
-### 12️⃣ 모델 성능 리포트 (ROC/AUC, MAE)
+### 12️⃣ 모델 비교
 <p align="center">
   <img src="./데이터분석/img/slide12.png" width="900"/>
   <br>
-  <em>슬라이드 12. 성능지표 및 Feature Importance 시각화</em>
+  <em>슬라이드 12. 어떠한 모델이 더 좋은지 성능 비교</em>
 </p>
 
 **설명:**  
-(예: ROC-AUC 0.94 / 중요 변수 Top5 / 재현율·정밀도 분석)
+(예: 설명이 불가능한 딥러닝 제외, 머신러닝 중 성능이 더 좋은 LGBM선택)
 
 ---
 
-### 13️⃣ 이상치 탐지 및 안정성 테스트
+### 13️⃣ 모델 고도화
 <p align="center">
   <img src="./데이터분석/img/slide13.png" width="900"/>
   <br>
-  <em>슬라이드 13. 이상치 제거 및 모델 안정화 과정</em>
+  <em>슬라이드 13. 모델 성능 향상 및 과적합 방지</em>
 </p>
 
 **설명:**  
-(예: 이상치 제거로 MAE 8% 개선 / 학습 데이터 분포 균형화)
+(예: 갭차이를 10이상 넘기지 않기 위해 노력했고 (과적합 방지), 최적의 튜닝과 새로운 컬럼을 추가함으로써 성능을 
+베이스라인 기준 42보다 약 60% 향상된 모델을 만들었습니다.)
 
 ---
 
@@ -288,8 +289,8 @@
 > → 모델 입력 피처 17개, 시계열 패턴 중심 학습  
 
 > ###  머신러닝 모델링  
-> LightGBM / RandomForest / LSTM 실험 → RMSE 0.18 달성  
-> Class weight 조정(`scale_pos_weight`)으로 불균형 대응  
+> LightGBM / RandomForest / LSTM 
+> Class weight 조정, Optuna
 
 > ###  시각화 & 결과  
 > Recharts / Chart.js 기반 실시간 예측 그래프  
@@ -301,5 +302,4 @@
 ###  **추가 링크 및 자료**
 
 * GitHub 프로젝트 코드: [github.com/SugarCare_project](https://github.com/ubeen2/sugar-care_project)
-* 
-* 포트폴리오 PDF: [별첨파일]
+
