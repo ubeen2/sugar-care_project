@@ -87,7 +87,7 @@
 
 ---
 
-### 1️⃣ 데이터 전처리 & 통합 파이프라인
+### 1️⃣ 프로젝트 기획과정
 <p align="center">
   <img src="./데이터분석/img/slide1.png" width="900"/>
   <br>
@@ -99,27 +99,22 @@
 
 ---
 
-### 2️⃣ EDA: 혈당 분포 및 피처 상관관계
+### 2️⃣ 사용자들이 직면한 문제
 <p align="center">
   <img src="./데이터분석/img/slide2.png" width="900"/>
   <br>
   <em>슬라이드 2. 주요 변수 간 상관관계 시각화</em>
 </p>
 
-**설명:**  
-(예: BMI, HDL, 공복혈당 간 관계 분석 / Pearson r 계산 등)
 
 ---
 
-### 3️⃣ Feature Engineering 구조
+### 3️⃣ 프로젝트 목표
 <p align="center">
   <img src="./데이터분석/img/slide3.png" width="900"/>
   <br>
   <em>슬라이드 3. 파생변수 생성 및 윈도우 통계 구조</em>
 </p>
-
-**설명:**  
-(예: Δ5, Δ30 변화율, 이동평균, 시계열 패턴 변수 생성 과정 설명)
 
 ---
 
